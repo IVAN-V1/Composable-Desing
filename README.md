@@ -1,46 +1,38 @@
-# Astro Starter Kit: Basics
+# 🚀 Composable Desing
 
-```sh
-npm create astro@latest -- --template basics
-```
+¡Dale vida a tus apps de Android con componentes declarativos de alto nivel! Este repositorio es una biblioteca visual de componentes esenciales construidos 100% con **Jetpack Compose**.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+## ✨ Características del Repositorio
+Este proyecto está diseñado para desarrolladores que buscan inspiración o código listo para usar (**copy-paste ready**) en sus interfaces.
 
-Inside of your Astro project, you'll see the following folders and files:
+### 📦 Componentes Incluidos:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+* **🔘 Buttons** 
+* **🎴 Cards:**
+* **🔼 Bottom Sheets:** 
+* **⏳ Progress Indicators:** 
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## 🛠️ Tecnologías Utilizadas
+![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)
+![Android SDK](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🌐 Demo En Vivo 
+¿Quieres ver cómo lucen y se comportan los componentes antes de ver el código? 
 
-## 👀 Want to learn more?
+### 👉 [Ver el Catálogo de Componentes Aquí](https://composabledesing.vercel.app/) 🚀
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 
+
+
+![Preview de la Página](./nombre-de-tu-imagen.png)
+
+
+
+
