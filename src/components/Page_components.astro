@@ -1,0 +1,896 @@
+---
+import "../styles/global.css";
+import Componente from "./Lista_Buttons/Componentes.astro";
+const pathname = Astro.url.pathname;
+
+const propertyCardCode = `@Preview
+@Composable
+fun PropertyCard() {
+
+
+    Card(
+        shape = RoundedCornerShape(24.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(350.dp),
+        onClick = {}
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Imagen de la propiedad
+            Image(
+                // REEMPLAZA ESTO con tu imagen real R.drawable.tu_casa
+                painter = painterResource(id = R.drawable.hotel),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+
+            // Botón Favorito (Corazón)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(16.dp)
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .background(Color.White.copy(alpha = 0.3f)), // Semi transparente
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(Icons.Default.FavoriteBorder, contentDescription = null, tint = Color.White)
+            }
+
+            // Información flotante abajo
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp)
+            ) {
+
+                Row (modifier = Modifier.padding(bottom = 8.dp)){
+
+                    Icon(
+                        imageVector = Icons.Outlined.LocationOn,
+                        contentDescription = "Go to details",
+                        tint = Color.White,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Text(
+                        text = "Boston",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                Text(
+                    text = "11 Green Bank",
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // Fila de Precio y Botón "See Details"
+                Row {
+                    // Precio
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(Color.White.copy(alpha = 0.2f)) // Efecto traslúcido
+                            .padding(horizontal = 12.dp, vertical = 8.dp),
+
+                        ) {
+                        Text(
+                            text = "$14.5k/m",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+
+                    }
+
+
+
+
+
+
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(Color.White.copy(alpha = 0.2f)) // Efecto traslúcido
+                            .padding(horizontal = 12.dp, vertical = 8.dp),
+
+                        ) {
+
+                        Row {
+
+                            Icon(
+                                imageVector = Icons.Outlined.Star,
+                                contentDescription = "stars",
+                                tint = Color.White,
+                                modifier = Modifier.size(16.dp)
+                            )
+
+
+                            Text(
+                                text = "5.0 reviewa",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+
+                    }
+
+
+                }
+
+                Box(
+                    modifier = Modifier
+                        .height(56.dp) // Un poco más de altura para que luzca como la imagen
+                        .fillMaxWidth()
+                        // 1. El Blur se aplica antes que el fondo para afectar lo que está detrás
+                        .clip(RoundedCornerShape(30.dp))
+                        .background(Color.White.copy(alpha = 0.25f)) // Fondo muy suave
+                        .border(
+                            width = 0.5.dp,
+                            color = Color.White.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(30.dp)
+                        ),// Espaciado interno para el círculo
+                    contentAlignment = Alignment.Center
+                ) {
+                    // 1. El texto se mantiene perfectamente centrado respecto al botón completo
+                    Text(
+                        text = "See Apartment Details",
+                        color = Color.White,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+
+                    // 2. El círculo con la flecha se empuja al extremo derecho
+                    Box(
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(CircleShape)
+                            .background(Color.White)
+                            .align(Alignment.CenterEnd), // Alineación clave
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                            contentDescription = "Go to details",
+                            tint = Color.Black,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
+
+            }
+
+
+        }
+    }
+}`;
+
+const freeGetButton = `
+@Composable
+@Preview
+fun GetFreeDemoButton(
+
+) {
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .height(50.dp)
+            .width(200.dp),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF1E4FFF) // Azul similar al de la imagen
+        ),
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = 6.dp,
+            pressedElevation = 2.dp
+        )
+    ) {
+        Text(
+            text = "Get free demo",
+            color = Color.White,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+`;
+
+const progressBar = `
+
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+
+@Preview
+@Composable
+fun ProgressCard(
+    progress: Float = 0.3f, // 30%
+    timeLeft: String = "15 Min"
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(24.dp)
+                .fillMaxWidth()
+        ) {
+            // Etiqueta superior
+            Text(
+                text = "Your Progress",
+                style = MaterialTheme.typography.labelLarge,
+                color = Color.LightGray,
+                fontWeight = FontWeight.Medium
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Fila con Porcentaje y Tiempo
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "{(progress * 100).toInt()}% To Complete",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = Color(0xFF0052FF), // Azul vibrante
+                    fontWeight = FontWeight.Bold
+                )
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.Star, // Necesitas importar Icons.Outlined
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                        tint = Color.LightGray
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = timeLeft,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.LightGray
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Barra de progreso personalizada
+            LinearProgressIndicator(
+                progress = { progress },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(20.dp) // Altura para que se vea grueso como en la imagen
+                    .clip(CircleShape), // Hace que los extremos sean redondos
+                color = Color(0xFF0052FF), // Color de la barra
+                trackColor = Color(0xFFE3F2FD), // Color del fondo (azul muy claro)
+                strokeCap = StrokeCap.Round // Asegura que el progreso también sea redondo
+            )
+        }
+    }
+}
+`;
+
+const progressBar2 = `
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+
+@Preview
+@Composable
+fun RewardProgressCard(
+    currentSpent: Float = 34f,
+    totalTarget: Float = 100f
+) {
+    val progress = (currentSpent / totalTarget).coerceIn(0f, 1f)
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Box(modifier = Modifier.padding(16.dp)) {
+            // Estrellas decorativas de fondo (puedes usar iconos simples)
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                modifier = Modifier.size(12.dp).align(Alignment.TopCenter).offset(y = (-4).dp),
+                tint = Color(0xFFEDE7F6)
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // 1. Icono de la bolsa de compras
+                Box(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(Color(0xFFE8E0FF)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    // Aquí iría tu imagen o Icon
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = null,
+                        modifier = Modifier.size(40.dp),
+                        tint = Color(0xFF6750A4)
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                // 2. Contenido Central (Texto + Barra)
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Spend $$ {totalTarget.toInt()}",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // Barra de progreso con indicador circular
+                    Box(
+                        modifier = Modifier.fillMaxWidth().height(32.dp),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        // Fondo de la barra
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(24.dp)
+                                .clip(CircleShape)
+                                .background(Color(0xFFF5F5F5))
+                        )
+
+                        // Progreso con Gradiente
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth(progress)
+                                .height(24.dp)
+                                .clip(CircleShape)
+                                .background(
+                                    brush = Brush.horizontalGradient(
+                                        colors = listOf(Color(0xFF9575CD), Color(0xFF7E57C2))
+                                    )
+                                )
+                        )
+
+
+                    }
+                }
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                // 3. Texto de la derecha
+                Text(
+                    text = "$$ {(totalTarget - currentSpent).toInt()} left",
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Black
+                )
+            }
+        }
+    }
+}
+
+`;
+
+const button2 = `
+@Preview
+@Composable
+fun PrimaryActionButton(
+) {
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp), // Altura estándar para botones principales
+        shape = CircleShape, // Esto le da la forma de píldora (Pill shape)
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF8B44F7), // El púrpura de la imagen
+            contentColor = Color.White
+        ),
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = 0.dp,
+            pressedElevation = 4.dp
+        )
+    ) {
+        Text(
+            text = "Get started",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            letterSpacing = 0.5.sp
+        )
+    }
+}
+
+`;
+
+const bottomSheet = `
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ResumeImprovementBottomSheet(
+    onDismissRequest: () -> Unit,
+    onImproveClick: () -> Unit
+) {
+    val sheetState = rememberModalBottomSheetState()
+
+    ModalBottomSheet(
+        onDismissRequest = onDismissRequest,
+        sheetState = sheetState,
+        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        containerColor = Color.White,
+        dragHandle = { BottomSheetDefaults.DragHandle() } // La rayita de arriba
+    ) {
+        // El contenido ya no necesita Surface porque el Sheet ya es un contenedor
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp)
+                .padding(bottom = 48.dp), // Espacio extra abajo para navegación del sistema
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // 1. Título
+            Text(
+                text = "Skip CV improvement?",
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // 2. Texto de descripción
+            Text(
+                text = "Optimizing your resume takes just seconds and can make a big difference.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.DarkGray,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            // 3. Icono/Ilustración
+            Icon(
+                imageVector = Icons.Default.LocationOn,
+                contentDescription = null,
+                modifier = Modifier.size(120.dp),
+                tint = Color(0xFF00C17C)
+            )
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            // 4. Botones
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextButton(onClick = onDismissRequest) {
+                    Text(
+                        text = "Skip",
+                        color = Color.Black,
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
+
+                Button(
+                    onClick = {
+                        onImproveClick()
+                        onDismissRequest() // Normalmente cerramos el sheet al hacer clic
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Black,
+                        contentColor = Color.White
+                    ),
+                    shape = RoundedCornerShape(12.dp),
+                    contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
+                ) {
+                    Text(
+                        text = "Improve CV",
+                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold)
+                    )
+                }
+            }
+        }
+    }
+}
+
+`;
+
+const components = [
+  {
+    title: "Card",
+    description: "",
+    image: "/card.png",
+    code: propertyCardCode,
+    category: "Cards",
+  },
+  {
+    title: "Button",
+    description: "",
+    image: "/Get_button.png",
+    code: freeGetButton,
+    category: "Buttons",
+  },
+  {
+    title: "Bottom Sheet",
+    description: "",
+    image: "/bottom_sheet.png",
+    code: bottomSheet,
+    category: "BottomSheet",
+  },
+  {
+    title: "Progress Bar",
+    description: "",
+    image: "/Progressbar.png",
+    code: progressBar,
+    category: "Progress",
+  },
+  {
+    title: "Progress Bar",
+    description: "",
+    image: "/Progressbar_2.png",
+    code: progressBar2,
+    category: "Progress",
+  },
+  {
+    title: "Button",
+    description: "",
+    image: "/Button_2.png",
+    code: button2,
+    category: "Buttons",
+  },
+];
+
+const categories = [
+  { id: "all", name: "Todos", image: "/logo_compose.png" },
+  { id: "Buttons", name: "Buttons", image: "/Button_2.png" },
+  { id: "Cards", name: "Cards", image: "/card.png" },
+  { id: "Progress", name: "Progress", image: "/Progressbar.png" },
+  { id: "BottomSheet", name: "Bottom Sheet", image: "/bottom_sheet.png" },
+];
+---
+
+<header class="relative bg-white z-50">
+  <div
+    class="max-w-7xl mx-auto w-full flex items-center justify-between px-8 py-5"
+  >
+    <div class="flex items-center gap-2 font-semibold text-lg">
+      <img src="/logo_compose.png" alt="Logo" class="w-10 h-10" />
+      <span class="ml-2"> Composable Desing</span>
+    </div>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a
+        href="/"
+        class={pathname === "/" || pathname === ""
+          ? "px-4 py-2 bg-blue-100 text-blue-600 rounded-full transition"
+          : "px-4 py-2 text-gray-600 hover:text-blue-600 transition"}>Inicio</a
+      >
+      <a
+        href="/componentes"
+        class={pathname === "/componentes" || pathname === "/componentes/"
+          ? "px-4 py-2 bg-blue-100 text-blue-600 rounded-full transition"
+          : "px-4 py-2 text-gray-600 hover:text-blue-600 transition"}
+        >Componentes</a
+      >
+     
+       <a
+      href="/SobreMi"
+      class={pathname === "/SobreMi" || pathname === "/SobreMi/"
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Sobre Mi</a
+    >
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="menu-toggle"
+      class="block md:hidden text-gray-600 focus:outline-none"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile Menu Dropdown -->
+  <div
+    id="mobile-menu"
+    class="absolute top-full left-0 w-full bg-white shadow-md flex-col gap-4 p-5 hidden md:hidden z-50"
+  >
+    <a
+      href="/"
+      class={pathname === "/" || pathname === ""
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Inicio</a
+    >
+    <a
+      href="/componentes"
+      class={pathname === "/componentes" || pathname === "/componentes/"
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Componentes</a
+    >
+  
+       <a
+      href="/SobreMi"
+      class={pathname === "/SobreMi" || pathname === "/SobreMi/"
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Sobre Mi</a
+    >
+  </div>
+</header>
+
+<section class="max-w-[1600px] mx-auto px-6 py-12">
+  <div class="mb-12">
+    <h3 class="text-2xl font-bold text-gray-900 mb-6">Ver Ejemplos</h3>
+    <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+      {
+        categories.map((cat) => (
+          <button
+            class="category-filter group flex flex-col items-center gap-3 min-w-[100px] cursor-pointer transition-all"
+            data-category={cat.id}
+          >
+            <div class="w-20 h-20 rounded-2xl bg-white border border-gray-200 p-4 shadow-sm group-hover:shadow-md group-[.active]:border-blue-500 group-[.active]:ring-2 group-[.active]:ring-blue-100 transition-all flex items-center justify-center relative overflow-hidden">
+              <img
+                src={cat.image}
+                alt={cat.name}
+                class="w-full h-full object-contain"
+              />
+            </div>
+            <span class="font-medium text-sm text-gray-600 group-hover:text-gray-900 group-[.active]:text-blue-600">
+              {cat.name}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+    Explora nuestros componentes
+  </h2>
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-500"
+    id="component-grid"
+  >
+    {
+      components.map((comp) => (
+        <Componente
+          title={comp.title}
+          description={comp.description}
+          image={comp.image}
+          code={comp.code}
+          category={comp.category}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style is:global>
+  /* Comportamiento de expansión real en el Grid */
+  @media (min-width: 1024px) {
+    .component-card {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Al expandirse, le decimos al grid que esta tarjeta ocupa 2 columnas */
+    /* Esto empuja automáticamente a la siguiente tarjeta a la derecha */
+    .component-card.expanded {
+      grid-column: span 2;
+    }
+
+    /* CASO ESPECIAL: Si la tarjeta es la 4ta de la fila, 
+       no puede expandirse a la derecha porque no hay columna 5.
+       En ese caso, le pedimos que empiece una columna antes. */
+    .component-card.expanded:nth-child(4n) {
+      grid-column: 3 / span 2;
+    }
+  }
+
+  /* Aseguramos que el contenido interno de la card se adapte al nuevo ancho */
+  .component-card.expanded .code-container {
+    display: flex !important;
+  }
+</style>
+
+<script>
+  function setupGridExpansion() {
+    const cards = document.querySelectorAll(".component-card");
+
+    cards.forEach((card) => {
+      const btn = card.querySelector(".view-code-btn");
+      const container = card.querySelector(".code-container");
+
+      btn?.addEventListener("click", () => {
+        const isExpanded = card.classList.contains("expanded");
+
+        // 1. Cerramos cualquier otra card abierta para que el grid no se descontrole
+        cards.forEach((c) => {
+          if (c !== card) {
+            c.classList.remove("expanded");
+            const otherCode = c.querySelector(".code-container");
+            if (otherCode) {
+              otherCode.classList.replace("max-h-[1000px]", "max-w-[1000px]"); // reset classes if needed
+              otherCode.classList.replace("opacity-100", "opacity-0");
+              // Para este efecto de empuje, usamos max-width en lugar de max-height
+              (otherCode as HTMLElement).style.maxWidth = "0px";
+            }
+            const span = c.querySelector(".view-code-btn span");
+            if (span) span.textContent = "Ver código";
+          }
+        });
+
+        // 2. Aplicamos la expansión a la tarjeta actual
+        if (isExpanded) {
+          card.classList.remove("expanded");
+          if (container) (container as HTMLElement).style.maxWidth = "0px";
+          container?.classList.replace("opacity-100", "opacity-0");
+          btn.querySelector("span")!.textContent = "Ver código";
+        } else {
+          card.classList.add("expanded");
+          // Le damos un ancho suficiente para que se vea el código
+          if (container) (container as HTMLElement).style.maxWidth = "1000px";
+          container?.classList.replace("opacity-0", "opacity-100");
+          btn.querySelector("span")!.textContent = "Cerrar código";
+        }
+      });
+    });
+  }
+
+  setupGridExpansion();
+
+  function setupFiltering() {
+    const filters = document.querySelectorAll(".category-filter");
+    const cards = document.querySelectorAll(".component-card");
+
+    // Default to first filter being active if none is
+    if (!document.querySelector(".category-filter.active")) {
+      filters[0]?.classList.add("active");
+    }
+
+    filters.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Handle Active State
+        filters.forEach((f) => f.classList.remove("active"));
+        btn.classList.add("active");
+
+        const activeCategory = (btn as HTMLElement).dataset.category || "all";
+
+        cards.forEach((card) => {
+          const cardCat = (card as HTMLElement).dataset.category;
+
+          if (activeCategory === "all" || cardCat === activeCategory) {
+            (card as HTMLElement).style.display = "";
+            // Small animation reset could go here
+            setTimeout(() => {
+              (card as HTMLElement).style.opacity = "1";
+              (card as HTMLElement).style.transform = "scale(1)";
+            }, 10);
+          } else {
+            (card as HTMLElement).style.display = "none";
+            (card as HTMLElement).style.opacity = "0";
+            (card as HTMLElement).style.transform = "scale(0.95)";
+            card.classList.remove("expanded"); // Close code view if filtered out
+          }
+        });
+      });
+    });
+  }
+
+  function setupMobileMenu() {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (menuToggle && mobileMenu && menuToggle.parentNode) {
+      // Remove old event listeners to prevent duplicates if function is called multiple times without replacement
+      // clonning the element is a quick way to strip event listeners
+      const newMenuToggle = menuToggle.cloneNode(true);
+      menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+
+      newMenuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        mobileMenu.classList.toggle("flex");
+      });
+    }
+  }
+
+  setupMobileMenu();
+  setupFiltering();
+
+  document.addEventListener("astro:after-swap", () => {
+    setupGridExpansion();
+    setupFiltering();
+    setupMobileMenu();
+  });
+</script>

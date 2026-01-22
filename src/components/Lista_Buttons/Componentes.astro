@@ -1,0 +1,95 @@
+---
+// src/components/Card.astro
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  code: string;
+  category?: string;
+}
+const { title, description, image, code, category } = Astro.props;
+---
+
+<div
+  class="component-card bg-white rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-[450px]"
+  data-category={category}
+>
+  <div
+    class="h-48 bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-6 border-b border-gray-50"
+  >
+    <img
+      src={image}
+      alt={title}
+      class="max-h-full object-contain drop-shadow-sm"
+    />
+  </div>
+
+  <div class="p-6 flex flex-col justify-between flex-grow">
+    <div>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+     
+    </div>
+
+    <button
+      class="copy-code-btn w-full py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-black transition-all flex items-center justify-center gap-2 mt-4 group"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-4 w-4 text-gray-400 group-hover:text-white"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+        ></path>
+      </svg>
+      <span>Copiar código</span>
+    </button>
+  </div>
+
+  <div class="hidden">
+    <code class="raw-code">{code}</code>
+  </div>
+</div>
+
+<script>
+  function setupCopy() {
+    const cards = document.querySelectorAll(".component-card");
+
+    cards.forEach((card) => {
+      const copyBtn = card.querySelector(".copy-code-btn");
+      const codeText = card.querySelector(".raw-code")?.textContent || "";
+
+      copyBtn?.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(codeText);
+
+          // Feedback visual
+          const span = copyBtn.querySelector("span");
+          if (span) {
+            const originalText = span.textContent;
+
+            span.textContent = "¡Copiado!";
+            copyBtn.classList.replace("bg-gray-900", "bg-green-600");
+
+            setTimeout(() => {
+              span.textContent = originalText;
+              copyBtn.classList.replace("bg-green-600", "bg-gray-900");
+            }, 2000);
+          }
+        } catch (err) {
+          console.error("Error al copiar: ", err);
+        }
+      });
+    });
+  }
+
+  // Ejecutar
+  setupCopy();
+  // Reiniciar si usas View Transitions
+  document.addEventListener("astro:after-swap", setupCopy);
+</script>

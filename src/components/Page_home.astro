@@ -1,0 +1,190 @@
+---
+import "../styles/global.css";
+
+const pathname = Astro.url.pathname;
+---
+
+<!-- MAIN CONTAINER --><!-- NAVBAR -->
+<header class="relative bg-white z-50">
+  <div
+    class="max-w-7xl mx-auto w-full flex items-center justify-between px-8 py-5"
+  >
+    <div class="flex items-center gap-2 font-semibold text-lg">
+      <img src="/logo_compose.png" alt="Logo" class="w-10 h-10" />
+      <span class="ml-2"> Composable Desing</span>
+    </div>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a
+        href="/"
+        class={pathname === "/" || pathname === ""
+          ? "px-4 py-2 bg-blue-100 text-blue-600 rounded-full transition"
+          : "px-4 py-2 text-gray-600 hover:text-blue-600 transition"}>Inicio</a
+      >
+      <a
+        href="/componentes"
+        class={pathname === "/componentes" || pathname === "/componentes/"
+          ? "px-4 py-2 bg-blue-100 text-blue-600 rounded-full transition"
+          : "px-4 py-2 text-gray-600 hover:text-blue-600 transition"}
+        >Componentes</a
+      >
+    
+    <a
+      href="/SobreMi"
+      class={pathname === "/SobreMi" || pathname === "/SobreMi/"
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Sobre Mi</a
+    >
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="menu-toggle"
+      class="block md:hidden text-gray-600 focus:outline-none"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile Menu Dropdown -->
+  <div
+    id="mobile-menu"
+    class="absolute top-full left-0 w-full bg-white shadow-md flex-col gap-4 p-5 hidden md:hidden z-50"
+  >
+    <a
+      href="/"
+      class={pathname === "/" || pathname === ""
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Inicio</a
+    >
+    <a
+      href="/componentes"
+      class={pathname === "/componentes" || pathname === "/componentes/"
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Componentes</a
+    >
+      <a
+      href="/SobreMi"
+      class={pathname === "/SobreMi" || pathname === "/SobreMi/"
+        ? "block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg font-medium"
+        : "block px-4 py-2 text-gray-600 hover:text-blue-600 font-medium"}
+      >Sobre Mi</a
+    >
+  </div>
+</header>
+
+<!-- HERO -->
+<section
+  class="relative px-6 py-16 md:px-10 md:py-24 bg-gray-50 overflow-hidden"
+>
+  <!-- FLOATING LEFT NOTE (Hidden on mobile) -->
+  <img
+    src="/Get_button.png"
+    alt="Get Button"
+    class="hidden lg:block absolute left-6 top-20 rotate-[-4deg] w-52 shadow-md rounded-xl z-10"
+  />
+
+  <!-- FLOATING RIGHT REMINDER (Hidden on mobile) -->
+  <div
+    class="hidden lg:block absolute right-8 top-24 bg-white rounded-xl shadow-lg p-5 w-70 rotate-3 z-10"
+  >
+    <h4
+      class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-4"
+    >
+      Task Progress
+    </h4>
+    <div class="space-y-4">
+      <div>
+        <div class="flex justify-between mb-1">
+          <span class="text-[10px] font-semibold text-gray-700">UI Design</span>
+          <span class="text-[10px] font-bold text-blue-600">75%</span>
+        </div>
+        <div class="w-full bg-gray-100 rounded-full h-1.5">
+          <div class="bg-blue-500 h-1.5 rounded-full" style="width: 75%"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1">
+          <span class="text-[10px] font-semibold text-gray-700"
+            >Development</span
+          >
+          <span class="text-[10px] font-bold text-blue-600">40%</span>
+        </div>
+        <div class="w-full bg-gray-100 rounded-full h-1.5">
+          <div class="bg-blue-400 h-1.5 rounded-full" style="width: 40%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER CONTENT -->
+  <div class="text-center max-w-3xl mx-auto relative z-20">
+    <div class="flex justify-center mb-6">
+      <div
+        class="w-14 h-14 bg-white rounded-xl shadow flex items-center justify-center"
+      >
+        <img src="/logo_compose.png" alt="Logo" class="w-16 h-16" />
+      </div>
+    </div>
+
+    <h1 class="text-4xl md:text-5xl font-semibold leading-tight px-2">
+      Diseña apps increíbles <span class="text-blue-500">en tiempo récord</span>
+      <br class="hidden md:block" />
+      <span class="text-gray-400 text-2xl md:text-3xl font-normal block mt-2"
+        >Componentes listos para Jetpack Compose</span
+      >
+    </h1>
+
+    <p class="mt-6 text-gray-500 px-4">
+      Optimiza tu flujo de trabajo y crea aplicaciones excepcionales con nuestra
+      colección de componentes.
+    </p>
+
+    <button
+      class="mt-8 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+    >
+      <a href="/componentes">Ver componentes</a>
+    </button>
+  </div>
+
+  <!-- FLOATING BOTTOM LEFT CARD (Hidden on mobile) -->
+  <div
+    class="hidden lg:block absolute left-10 bottom-12 rounded-xl p-4 w-64 rotate-[-4deg] z-10"
+  >
+    <img src="/card.png" alt="Card" class="w-full h-full" />
+  </div>
+
+  <!-- FLOATING BOTTOM RIGHT INTEGRATIONS (Hidden on mobile) -->
+  <div
+    class="hidden lg:block absolute right-10 bottom-10 rounded-xl rotate-[-4deg] shadow-lg p-4 w-100 z-10"
+  >
+    <img src="Nav.png" alt="Integrations" class="w-full h-full" />
+  </div>
+</section>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      mobileMenu.classList.toggle("flex");
+    });
+  }
+</script>
