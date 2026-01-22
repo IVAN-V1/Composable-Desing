@@ -31,7 +31,7 @@ Este proyecto está diseñado para desarrolladores que buscan inspiración o có
 ## 
 
 
-![Preview de la Página](./nombre-de-tu-imagen.png)
+![Preview de la Página](/public/Pagina.png)
 
 
 
